@@ -1,0 +1,160 @@
+/* Importación de fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap');
+
+/* Importación de las utilidades de Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Configuración de variables CSS personalizadas para colores */
+:root {
+  --color-primary: #ea580c;        /* Naranja principal */
+  --color-secondary: #f97316;      /* Naranja secundario */
+  --color-text: #111827;           /* Gris oscuro para texto */
+  --color-background: #fff7ed;     /* Crema claro para fondo */
+}
+
+/* Configuración base del documento */
+html, body {
+  font-family: 'Public Sans', 'Noto Sans', sans-serif; /* Fuente principal */
+  color: var(--color-text);                            /* Color de texto por defecto */
+  background-color: var(--color-background);           /* Color de fondo por defecto */
+  scroll-behavior: smooth;                             /* Desplazamiento suave para anclas */
+}
+
+/* Animaciones personalizadas */
+
+/* Animación de entrada desde arriba */
+@keyframes fade-in-down {
+  0% {
+    opacity: 0;              /* Comienza invisible */
+    transform: translateY(-20px); /* Comienza 20px arriba */
+  }
+  100% {
+    opacity: 1;              /* Termina completamente visible */
+    transform: translateY(0); /* Termina en su posición original */
+  }
+}
+
+/* Animación de entrada desde abajo */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;              /* Comienza invisible */
+    transform: translateY(20px); /* Comienza 20px abajo */
+  }
+  100% {
+    opacity: 1;              /* Termina completamente visible */
+    transform: translateY(0); /* Termina en su posición original */
+  }
+}
+
+/* Animación de aparición gradual */
+@keyframes fade-in {
+  from { 
+    opacity: 0;              /* Comienza invisible */
+    transform: translateY(20px); /* Comienza ligeramente abajo */
+  }
+  to { 
+    opacity: 1;              /* Termina completamente visible */
+    transform: translateY(0); /* Termina en su posición original */
+  }
+}
+
+/* Animación de temblor para iconos en hover */
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0); /* Mueve 1px a la izquierda */
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);  /* Mueve 2px a la derecha */
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0); /* Mueve 4px a la izquierda */
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);  /* Mueve 4px a la derecha */
+  }
+}
+
+/* Clases de utilidad para animaciones */
+
+/* Aplicar animación de entrada desde arriba */
+.animate-fade-in-down {
+  animation: fade-in-down 1s ease-out forwards;
+}
+
+/* Aplicar animación de entrada desde abajo con retraso */
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+  animation-delay: 0.3s;           /* Retraso de 0.3 segundos */
+  opacity: 0;                      /* Comienza invisible hasta que inicie la animación */
+}
+
+/* Aplicar animación de aparición gradual */
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+/* Aplicar animación de aparición gradual con retraso corto */
+.animate-fade-in-delayed {
+  animation: fade-in 1s ease-out forwards;
+  animation-delay: 0.2s;           /* Retraso de 0.2 segundos */
+  opacity: 0;                      /* Comienza invisible hasta que inicie la animación */
+}
+
+/* Aplicar animación de aparición gradual con retraso largo */
+.animate-fade-in-delayed-more {
+  animation: fade-in 1s ease-out forwards;
+  animation-delay: 0.6s;           /* Retraso de 0.6 segundos */
+  opacity: 0;                      /* Comienza invisible hasta que inicie la animación */
+}
+
+/* Efectos hover para botones de acción */
+.grupo-boton:hover .icono-boton {
+  animation: shake 0.5s;           /* Aplicar animación de temblor al icono */
+}
+
+/* Efectos de transición para elementos interactivos */
+.grupo-boton {
+  transition: all 0.3s ease-in-out; /* Transición suave para todas las propiedades */
+}
+
+/* Efectos hover adicionales */
+.grupo-boton:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Sombra más pronunciada en hover */
+}
+
+/* Estilos para el selector de idioma */
+.language-selector .lang-option {
+  transition: background-color 0.2s ease-in-out; /* Transición suave para el color de fondo */
+}
+
+.language-selector .lang-option:hover {
+  background-color: var(--color-secondary); /* Color de fondo en hover */
+  color: white;                              /* Color de texto en hover */
+}
+
+/* Estilos responsivos adicionales */
+@media (max-width: 768px) {
+  /* Ajustes para pantallas móviles */
+  .animate-fade-in-down {
+    animation-duration: 0.8s;        /* Animación más rápida en móvil */
+  }
+  
+  .animate-fade-in-up {
+    animation-duration: 0.8s;        /* Animación más rápida en móvil */
+    animation-delay: 0.2s;           /* Retraso menor en móvil */
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  /* Desactivar animaciones para usuarios que prefieren movimiento reducido */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
