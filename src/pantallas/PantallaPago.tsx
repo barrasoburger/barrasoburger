@@ -117,22 +117,22 @@ export function PantallaPago({
     const { usuarioActual, clienteActual, esCliente } = useAuth();
     
     if (esCliente && clienteActual) {
-      // Crear productos para la base de datos
-      const productosParaBD = carrito.map(item => ({
-        producto: item.producto.nombre + (item.personalizacion ? ' (Personalizada)' : ''),
-        cantidad: item.cantidad,
-        precio_unitario: item.precioPersonalizado || parseFloat(item.producto.precio.replace('€', ''))
-      }));
-      
-      // Crear el pedido con información adicional
-      baseDatos.crearPedido(
-        clienteActual.id_cliente, 
-        totalConImpuestos, 
-        productosParaBD,
-        datosPago.direccion || 'Dirección no especificada',
-        datosPago.telefono || clienteActual.telefono,
-        metodoPago === 'bizum' ? 'Bizum' : metodoPago === 'tarjeta' ? 'Transferencia Bancaria' : 'PayPal'
-      );
+        // Crear productos para la base de datos
+        const productosParaBD = carrito.map(item => ({
+          producto: item.producto.nombre + (item.personalizacion ? ' (Personalizada)' : ''),
+          cantidad: item.cantidad,
+          precio_unitario: item.precioPersonalizado || item.producto.precio
+        }));
+        
+        // Crear el pedido con información adicional
+        baseDatos.crearPedido(
+          clienteActual.id_cliente, 
+          totalConImpuestos, 
+          productosParaBD,
+          datosPago.direccion || 'Dirección no especificada',
+          datosPago.telefono || clienteActual.telefono,
+          metodoPago === 'bizum' ? 'Bizum' : metodoPago === 'tarjeta' ? 'Transferencia Bancaria' : 'PayPal'
+        );
     }
     
     // Mostrar mensaje de confirmación

@@ -3,7 +3,7 @@ export interface ElementoMenu {
   id: number;
   nombre: string;
   descripcion: string;
-  precio: string;
+  precio: number;
   imagen: string;
   categoria: 'hamburguesas' | 'acompañamientos' | 'bebidas';
   // Propiedades adicionales para el detalle del producto

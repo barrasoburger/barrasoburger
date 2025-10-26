@@ -151,7 +151,7 @@ export function ModalPersonalizacion({
   };
 
   // Calcular precio total
-  const precioBase = parseFloat(producto.precio.replace('€', ''));
+  const precioBase = producto.precio;
   const precioTotal = (precioBase + personalizacion.precioExtra) * cantidad;
 
   console.log('Modal render - isOpen:', isOpen, 'producto:', producto?.nombre);

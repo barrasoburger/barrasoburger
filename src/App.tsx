@@ -100,7 +100,7 @@ function AppInterno() {
   const agregarAlCarrito = (producto: ElementoMenu, cantidad: number = 1, personalizacion?: PersonalizacionHamburguesa) => {
     setCarrito(carritoActual => {
       // Calcular precio personalizado si hay personalización
-      const precioBase = parseFloat(producto.precio.replace('€', ''));
+      const precioBase = producto.precio;
       const precioPersonalizado = personalizacion ? precioBase + personalizacion.precioExtra : precioBase;
       
       // Para hamburguesas personalizadas, siempre crear una nueva entrada
@@ -157,7 +157,7 @@ function AppInterno() {
   // Función para obtener el precio total del carrito (subtotal sin impuestos)
   const obtenerPrecioTotal = () => {
     return carrito.reduce((total, item) => {
-      const precio = item.precioPersonalizado || parseFloat(item.producto.precio.replace('€', ''));
+      const precio = item.precioPersonalizado || item.producto.precio;
       return total + (precio * item.cantidad);
     }, 0);
   };
@@ -190,28 +190,28 @@ function AppInterno() {
     // Obtener todos los elementos del menú para hacer match con los productos del pedido
     const elementosMenu = [
       // Hamburguesas
-      { id: 1, nombre: 'BarrasoBurger Clásica', precio: '€11.99', categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 2, nombre: 'Bacon Deluxe', precio: '€14.99', categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 3, nombre: 'Aguacate Ranch', precio: '€13.99', categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 4, nombre: 'BBQ Especial', precio: '€15.99', categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 5, nombre: 'Vegetariana Suprema', precio: '€12.99', categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1525059696034-4967a729002e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 6, nombre: 'Picante Jalapeño', precio: '€14.49', categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1553979459-d2229ba7433a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 1, nombre: 'BarrasoBurger Clásica', precio: 11.99, categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 2, nombre: 'Bacon Deluxe', precio: 14.99, categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 3, nombre: 'Aguacate Ranch', precio: 13.99, categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 4, nombre: 'BBQ Especial', precio: 15.99, categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 5, nombre: 'Vegetariana Suprema', precio: 12.99, categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1525059696034-4967a729002e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 6, nombre: 'Picante Jalapeño', precio: 14.49, categoria: 'hamburguesas', imagen: 'https://images.unsplash.com/photo-1553979459-d2229ba7433a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
       // Acompañamientos
-      { id: 7, nombre: 'Papas Fritas Crujientes', precio: '€4.49', categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 7, nombre: 'Papas Fritas', precio: '€4.49', categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }, // Alias
-      { id: 8, nombre: 'Aros de Cebolla Dorados', precio: '€5.49', categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1639024471283-03518883512d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 8, nombre: 'Aros de Cebolla', precio: '€5.49', categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1639024471283-03518883512d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }, // Alias
-      { id: 9, nombre: 'Papas de Camote', precio: '€5.49', categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 10, nombre: 'Nuggets de Pollo', precio: '€6.49', categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 11, nombre: 'Ensalada César', precio: '€7.49', categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 12, nombre: 'Palitos de Mozzarella', precio: '€5.99', categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 7, nombre: 'Papas Fritas Crujientes', precio: 4.49, categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 7, nombre: 'Papas Fritas', precio: 4.49, categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }, // Alias
+      { id: 8, nombre: 'Aros de Cebolla Dorados', precio: 5.49, categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1639024471283-03518883512d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 8, nombre: 'Aros de Cebolla', precio: 5.49, categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1639024471283-03518883512d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }, // Alias
+      { id: 9, nombre: 'Papas de Camote', precio: 5.49, categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 10, nombre: 'Nuggets de Pollo', precio: 6.49, categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 11, nombre: 'Ensalada César', precio: 7.49, categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 12, nombre: 'Palitos de Mozzarella', precio: 5.99, categoria: 'acompañamientos', imagen: 'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
       // Bebidas
-      { id: 13, nombre: 'Coca-Cola', precio: '€2.79', categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 14, nombre: 'Sprite', precio: '€2.79', categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 15, nombre: 'Té Helado', precio: '€3.29', categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 16, nombre: 'Malteada de Vainilla', precio: '€4.79', categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 17, nombre: 'Jugo de Naranja Natural', precio: '€3.79', categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-      { id: 18, nombre: 'Café Americano', precio: '€2.29', categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }
+      { id: 13, nombre: 'Coca-Cola', precio: 2.79, categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 14, nombre: 'Sprite', precio: 2.79, categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 15, nombre: 'Té Helado', precio: 3.29, categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 16, nombre: 'Malteada de Vainilla', precio: 4.79, categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 17, nombre: 'Jugo de Naranja Natural', precio: 3.79, categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+      { id: 18, nombre: 'Café Americano', precio: 2.29, categoria: 'bebidas', imagen: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }
     ];
 
     // Procesar cada producto del pedido
@@ -231,7 +231,7 @@ function AppInterno() {
           id: productoEncontrado.id,
           nombre: productoEncontrado.nombre,
           descripcion: `Repetido del pedido #${pedido.id_pedido}`,
-          precio: `€${productoPedido.precio_unitario.toFixed(2)}`,
+          precio: productoEncontrado.precio,
           imagen: productoEncontrado.imagen,
           categoria: productoEncontrado.categoria as 'hamburguesas' | 'acompañamientos' | 'bebidas',
           disponible: true
@@ -246,7 +246,7 @@ function AppInterno() {
             ingredientesRemovidos: [],
             acompañamiento: 'papas-fritas',
             bebida: 'coca-cola',
-            precioExtra: Math.max(0, productoPedido.precio_unitario - parseFloat(productoEncontrado.precio.replace('€', '')))
+            precioExtra: Math.max(0, productoPedido.precio_unitario - productoEncontrado.precio)
           };
         }
 

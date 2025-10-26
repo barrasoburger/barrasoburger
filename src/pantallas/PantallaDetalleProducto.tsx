@@ -679,18 +679,18 @@ export function PantallaDetalleProducto({
               <div className="flex justify-between items-center mb-6 p-4 bg-orange-50 rounded-lg">
                 <div>
                   <span className="text-lg font-medium text-gray-700">Precio base:</span>
-                  <div className="text-sm text-gray-600">€{parseFloat(producto.precio.replace('€', '')).toFixed(2)}</div>
+                  <div className="text-sm text-gray-600">€{producto.precio.toFixed(2)}</div>
                   {producto.categoria === 'hamburguesas' && personalizacion.precioExtra > 0 && (
                     <div className="text-sm text-orange-600">Extras: +€{personalizacion.precioExtra.toFixed(2)}</div>
                   )}
                 </div>
                 <div className="text-right">
                   <span className="text-3xl font-bold text-orange-600">
-                    €{((parseFloat(producto.precio.replace('€', '')) + (producto.categoria === 'hamburguesas' ? personalizacion.precioExtra : 0)) * cantidad).toFixed(2)}
+                    €{((producto.precio + (producto.categoria === 'hamburguesas' ? personalizacion.precioExtra : 0)) * cantidad).toFixed(2)}
                   </span>
                   {cantidad > 1 && (
                     <div className="text-sm text-gray-600">
-                      €{(parseFloat(producto.precio.replace('€', '')) + (producto.categoria === 'hamburguesas' ? personalizacion.precioExtra : 0)).toFixed(2)} x {cantidad}
+                      €{(producto.precio + (producto.categoria === 'hamburguesas' ? personalizacion.precioExtra : 0)).toFixed(2)} x {cantidad}
                     </div>
                   )}
                 </div>

@@ -304,11 +304,11 @@ export function PantallaCarrito({
                           <div className="flex items-center gap-4">
                             <div className="text-right">
                               <span className="text-xl font-bold text-orange-600">
-                                €{((item.precioPersonalizado || parseFloat(item.producto.precio.replace('€', ''))) * item.cantidad).toFixed(2)}
+                                €{((item.precioPersonalizado || item.producto.precio) * item.cantidad).toFixed(2)}
                               </span>
                               {item.personalizacion && item.personalizacion.precioExtra > 0 && (
                                 <div className="text-xs text-gray-500">
-                                  (€{(item.precioPersonalizado || parseFloat(item.producto.precio.replace('€', ''))).toFixed(2)} c/u)
+                                  (€{(item.precioPersonalizado || item.producto.precio).toFixed(2)} c/u)
                                 </div>
                               )}
                             </div>
